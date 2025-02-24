@@ -34,7 +34,14 @@ jobs:
     steps:
       - checkout
       - run: echo "This is a 'deploy' step."
+  release:
+    machine: true                                        # What is this for?
+    steps:
+      - checkout
 
+      - run: |
+          docker build -t /django.nv .   # Build the application into Docker image
+          docker push /django.nv         # Push the image into registry
 workflows:
   version: 2
   django:
